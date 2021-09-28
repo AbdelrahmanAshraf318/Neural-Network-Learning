@@ -143,6 +143,10 @@ end;
 Theta2_grad = (1/m) * Theta2_grad; % (10*26)
 Theta1_grad = (1/m) * Theta1_grad; % (25*401)
 
+%Regularized Neural Network
+
+Theta1_grad(: , 2:end) = Theta1_grad(: , 2:end) + ( (lambda/m) * Theta1(: , 2:end));
+Theta2_grad(: , 2:end) = Theta2_grad(: , 2:end) + ( (lambda/m) * Theta2(: , 2:end) );
 
 
 % =========================================================================
