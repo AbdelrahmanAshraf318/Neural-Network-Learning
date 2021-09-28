@@ -83,6 +83,15 @@ end
 
 J = (1/m) * sum ( sum ( (-y_new) .* log(h_theta) - (1-y_new) .* log(1-h_theta) ));
 
+%To remove the bias as the regularized cannot take the bias
+newTheta1 = Theta1(:,2:size(Theta1,2));
+newTheta2 = Theta2(:,2:size(Theta2,2));
+
+calcReg =  (sum( sum( newTheta1 .^ 2 ) ) + sum( sum( newTheta2 .^ 2 ) )) / (2 * m);
+Reg = lambda * calcReg;
+
+J = J + Reg;
+
 % -------------------------------------------------------------
 
 % =========================================================================
