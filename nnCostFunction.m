@@ -62,23 +62,26 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%part-1 Cost function of neural network
 
+r = size(Theta1); %25 * 401
+r2 = size(X); %5000 * 400
 
+X = [ones(m,1) X]; % 5000*401
+z2 = Theta1 * X'; % (25*401)*(401*5000)
+a2 = sigmoid(z2); % (25*5000)
 
+a2 = [ones(m,1) a2'];
+z3 = Theta2 * a2';
+h_theta = sigmoid(z3); % h_theta equals a3
 
+% y(k) - the great trick - we need to recode the labels as vectors containing only values 0 or 1 (page 5 of ex4.pdf)
+y_new = zeros(num_labels, m); % 10*5000
+for i=1:m,
+  y_new(y(i),i)=1;
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
+J = (1/m) * sum ( sum ( (-y_new) .* log(h_theta) - (1-y_new) .* log(1-h_theta) ));
 
 % -------------------------------------------------------------
 
